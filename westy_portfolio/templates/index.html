@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero section-shell" id="top">
+    <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="status-dot"></span> ВІДКРИТИЙ ДО НОВИХ ПРОЄКТІВ</p>
+        <h1 class="hero-quote">«Ідеї набувають сили,<br>коли стають <span class="gradient-text">реальністю.</span>»</h1>
+        <p class="hero-alias">— Андрій Бідник (Westy)</p>
+        <p class="hero-description">Backend / Fullstack розробник. Перетворюю ідеї на виразні сайти та корисні Telegram-боти.</p>
+        <div class="hero-actions">
+            <a class="button button-primary" href="{% url 'portfolio:contact' %}">Обговорити проєкт <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="#projects">Мої роботи <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-socials">
+            <a href="https://t.me/managerwesty" target="_blank" rel="noopener noreferrer">Telegram <span aria-hidden="true">↗</span></a>
+            <a href="mailto:andribidnik16@gmail.com">Email <span aria-hidden="true">↗</span></a>
+            <a href="tel:+380683904928">Зателефонувати <span aria-hidden="true">↗</span></a>
+        </div>
+    </div>
+    <div class="hero-art reveal" data-tilt>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="art-glow"></div>
+        <div class="code-card">
+            <div class="code-card-top"><span></span><span></span><span></span><small>westy.py</small></div>
+            <div class="code-lines" aria-label="Приклад коду">
+                <p><span class="code-purple">class</span> <span class="code-pink">Westy</span>:</p>
+                <p class="code-indent"><span class="code-purple">def</span> <span class="code-blue">create</span>(self):</p>
+                <p class="code-indent-two">idea = <span class="code-green">"your vision"</span></p>
+                <p class="code-indent-two"><span class="code-purple">return</span> <span class="code-pink">build</span>(idea)</p>
+            </div>
+            <div class="code-card-foot"><span class="status-dot"></span> ГОТОВИЙ ДО РОБОТИ <span>UA · 2026</span></div>
+        </div>
+        <div class="floating-chip chip-one"><span class="chip-icon">✳</span> Web development</div>
+        <div class="floating-chip chip-two"><span class="chip-icon">⌘</span> Telegram bots</div>
+        <div class="floating-orb orb-one"></div><div class="floating-orb orb-two"></div>
+    </div>
+    <a class="scroll-hint" href="#about"><span></span> ГОРТАЙТЕ ДАЛІ</a>
+</section>
+
+<section class="about section-shell" id="about">
+    <div class="section-heading reveal">
+        <p class="eyebrow">01 / ПРО МЕНЕ</p>
+        <h2>Код із сенсом.<br><span class="gradient-text">Дизайн із характером.</span></h2>
+    </div>
+    <div class="about-grid">
+        <p class="about-copy reveal">Я Андрій — розробник, який допомагає бізнесу й людям запускати цифрові продукти. Створюю швидкі вебсайти та Telegram-боти: від першої ідеї й дизайну до готового рішення.</p>
+        <div class="stats-grid reveal">
+            <article class="stat-card"><strong>2<span>+</span></strong><p>сучасні вебсайти</p></article>
+            <article class="stat-card"><strong>7<span>+</span></strong><p>Telegram-ботів</p></article>
+            <article class="stat-card stat-card-wide"><strong>85<span>+</span></strong><p>задоволених клієнтів та успішних замовлень</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="services section-shell">
+    <div class="section-heading reveal">
+        <p class="eyebrow">02 / ЩО Я РОБЛЮ</p>
+        <h2>Від задачі — <span class="gradient-text">до результату.</span></h2>
+    </div>
+    <div class="service-list">
+        <article class="service-row reveal"><span class="service-number">01</span><div><h3>Вебсайти</h3><p>Сучасні, адаптивні сайти з продуманим дизайном і надійною серверною частиною.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+        <article class="service-row reveal"><span class="service-number">02</span><div><h3>Telegram-боти</h3><p>Автоматизація, інтеграції та зручні боти, що економлять час і працюють для вашого бізнесу.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+        <article class="service-row reveal"><span class="service-number">03</span><div><h3>Backend-розробка</h3><p>API, бази даних, адмін-панелі та логіка, на якій тримається ваш продукт.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+    </div>
+</section>
+
+<section class="projects section-shell" id="projects">
+    <div class="section-heading projects-heading reveal">
+        <div><p class="eyebrow">03 / ВИБРАНІ РОБОТИ</p><h2>Проєкти, які <span class="gradient-text">говорять самі.</span></h2></div>
+        <span class="project-count">{{ projects|length|stringformat:"02d" }} / РОБІТ</span>
+    </div>
+    {% if projects %}
+        <div class="project-grid">
+            {% for project in projects %}
+                <article class="project-card reveal" data-tilt>
+                    <a class="project-image" href="{% if project.url %}{{ project.url }}{% else %}{% url 'portfolio:contact' %}{% endif %}"{% if project.url %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {% if project.image %}<img src="{{ project.image.url }}" alt="Зображення проєкту «{{ project.title }}»" loading="lazy">{% else %}<div class="project-placeholder"><span>W.</span></div>{% endif %}
+                        <span class="project-open" aria-label="Відкрити проєкт">↗</span>
+                    </a>
+                    <div class="project-info"><div><h3>{{ project.title }}</h3><p>{{ project.description }}</p></div>{% if project.tech_stack %}<span class="tech-stack">{{ project.tech_stack }}</span>{% endif %}</div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-projects reveal"><span class="empty-mark">✳</span><p>Нові роботи вже скоро з'являться тут.</p><a href="{% url 'admin:index' %}">Додати проєкт через адмін-панель <span aria-hidden="true">↗</span></a></div>
+    {% endif %}
+</section>
+
+<section class="contact-cta section-shell reveal">
+    <p class="eyebrow">Є ІДЕЯ? ПОЧНІМО</p>
+    <h2>Створимо щось<br><span class="gradient-text">класне разом.</span></h2>
+    <a class="button button-primary" href="{% url 'portfolio:contact' %}">Написати мені <span aria-hidden="true">↗</span></a>
+</section>
+{% endblock %}

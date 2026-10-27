@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#100b14">
+    <meta name="description" content="Андрій Бідник (Westy) — Backend / Fullstack розробник. Сайти та Telegram-боти.">
+    <title>{% block title %}WESTY — розробник сайтів і Telegram-ботів{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+    <script src="{% static 'portfolio/js/main.js' %}" defer></script>
+</head>
+<body>
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <header class="site-header">
+        <a class="brand" href="{% url 'portfolio:home' %}" aria-label="WESTY — на головну">
+            <span class="brand-mark">W.</span><span>WESTY<span class="brand-dot">.</span></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Відкрити меню">
+            <span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Головна навігація">
+            <a href="{% url 'portfolio:home' %}#about">Про мене</a>
+            <a href="{% url 'portfolio:home' %}#projects">Проєкти</a>
+            <a href="{% url 'portfolio:contact' %}" class="nav-cta">Обговорити проєкт <span aria-hidden="true">↗</span></a>
+        </nav>
+    </header>
+
+    <main>
+        {% if messages %}
+            <div class="message-stack" role="status">
+                {% for message in messages %}<p class="flash-message">{{ message }}</p>{% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <a class="brand footer-brand" href="{% url 'portfolio:home' %}"><span class="brand-mark">W.</span><span>WESTY<span class="brand-dot">.</span></span></a>
+        <p>Створюю цифрові продукти з характером.</p>
+        <span>© {% now "Y" %} WESTY</span>
+    </footer>
+</body>
+</html>

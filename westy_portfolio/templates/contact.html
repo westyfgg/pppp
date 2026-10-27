@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Зв'язатися — WESTY{% endblock %}
+{% block content %}
+<section class="contact-page section-shell">
+    <div class="contact-intro reveal">
+        <p class="eyebrow">НА ЗВ'ЯЗКУ</p>
+        <h1>Розкажіть<br>про <span class="gradient-text">вашу ідею.</span></h1>
+        <p>Заповніть форму — і я відповім вам найближчим часом.</p>
+        <div class="contact-direct">
+            <a href="https://t.me/managerwesty" target="_blank" rel="noopener noreferrer"><span>TELEGRAM</span>@managerwesty <b aria-hidden="true">↗</b></a>
+            <a href="mailto:andribidnik16@gmail.com"><span>EMAIL</span>andribidnik16@gmail.com <b aria-hidden="true">↗</b></a>
+            <a href="tel:+380683904928"><span>ТЕЛЕФОН</span>+380 68 390 49 28 <b aria-hidden="true">↗</b></a>
+        </div>
+    </div>
+    <form class="contact-form reveal" method="post" action="{% url 'portfolio:contact' %}" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="form-errors" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+        <div class="form-field">
+            <label for="{{ form.name.id_for_label }}">Ваше ім'я</label>
+            {{ form.name }}
+            {% for error in form.name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        <div class="form-two-columns">
+            <div class="form-field">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {% for error in form.email.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+            <div class="form-field">
+                <label for="{{ form.telegram.id_for_label }}">Telegram</label>
+                {{ form.telegram }}
+                {% for error in form.telegram.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+        </div>
+        <div class="form-field">
+            <label for="{{ form.message.id_for_label }}">Ваше повідомлення</label>
+            {{ form.message }}
+            {% for error in form.message.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        <p class="form-note">Вкажіть хоча б один спосіб зв'язку: email або Telegram.</p>
+        <button class="button button-primary form-submit" type="submit">Надіслати повідомлення <span aria-hidden="true">↗</span></button>
+    </form>
+</section>
+{% endblock %}

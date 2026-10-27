@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Повідомлення надіслано — WESTY{% endblock %}
+{% block content %}
+<section class="sent-page section-shell reveal">
+    <span class="sent-icon" aria-hidden="true">✓</span>
+    <p class="eyebrow">ПОВІДОМЛЕННЯ НАДІСЛАНО</p>
+    <h1>Дякую за<br><span class="gradient-text">звернення!</span></h1>
+    <p>Я отримав ваше повідомлення та скоро відповім.</p>
+    <a class="button button-primary" href="{% url 'portfolio:home' %}">На головну <span aria-hidden="true">↗</span></a>
+</section>
+{% endblock %}
